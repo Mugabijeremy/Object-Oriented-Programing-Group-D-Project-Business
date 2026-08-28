@@ -17,7 +17,7 @@ public class GroupD_BusinessSimulator {
         displayPriceList(items, prices);
 
         // Print itemized receipt and calculate grand total
-        System.out.println("==== RECEIPT ====");
+        IO.println("==== RECEIPT ====");
         double grandTotal = 0.0;
 
         for (int i = 0; i < items.length; i++) {
@@ -31,19 +31,18 @@ public class GroupD_BusinessSimulator {
             grandTotal += itemSubtotal;
 
             // Output receipt line item
-            System.out.printf("%-20s x%d = UGX %.2f %s%n", 
-                items[i], quantities[i], itemSubtotal, discountNote);
+            IO.printf("%-20s x%d = UGX %.2f %s%n", items[i], quantities[i], itemSubtotal, discountNote);
         }
 
-        System.out.println("--------------------------------------------------");
-        System.out.printf("TOTAL               = UGX %.2f%n", grandTotal);
+        IO.println("--------------------------------------------------");
+        IO.printf("TOTAL               = UGX %.2f%n", grandTotal);
     }
 
     // Custom Method 1: Iterates through arrays using a loop to display the price list
     public static void displayPriceList(String[] names, double[] prices) {
         System.out.println("==== CITYCARE PHARMACY ====");
         for (int i = 0; i < names.length; i++) {
-            System.out.printf("%d. %-20s UGX %.2f%n", (i + 1), names[i], prices[i]);
+            IO.printf("%d. %-20s UGX %.2f%n", (i + 1), names[i], prices[i]);
         }
         System.out.println();
     }

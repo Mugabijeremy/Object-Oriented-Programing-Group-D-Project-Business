@@ -77,17 +77,52 @@ public class GroupD_BusinessSimulator {
         return totalBeforeDiscount;
     }
 
-    // Custom Method 3: Generates explicit discount descriptions for receipt lines
-    public static String getDiscountNote(int itemIndex, int quantity) {
+      // Custom Method 3:
+    // Returns a message describing whether a discount was applied.
+    public static String getDiscountNote(
+        int itemIndex,
+        int quantity
+    ) {
+
         if (itemIndex == 0) {
-            return (quantity >= 6) ? "(5% discount applied)" : "(no discount - fewer than 6)";
-        } else if (itemIndex == 1) {
-            return "(no discount)";
-        } else if (itemIndex == 2) {
-            return (quantity >= 4) ? "(UGX 1,000 discount applied)" : "(no discount - fewer than 4)";
-        } else if (itemIndex == 3) {
-            return (quantity >= 2) ? "(10% discount applied)" : "(no discount - fewer than 2)";
+
+            if (quantity >= 6) {
+                return "(5% discount applied)";
+            } else {
+                return "(no discount - fewer than 6)";
+            }
+
         }
-        return "";
+
+        else if (itemIndex == 1) {
+
+            return "(no discount)";
+
+        }
+
+        else if (itemIndex == 2) {
+
+            if (quantity >= 4) {
+                return "(UGX 1,000 discount applied)";
+            } else {
+                return "(no discount - fewer than 4)";
+            }
+
+        }
+
+        else if (itemIndex == 3) {
+
+            if (quantity >= 2) {
+                return "(10% discount applied)";
+            } else {
+                return "(no discount - fewer than 2)";
+            }
+
+        }
+
+        else {
+
+            return "";
+        }
     }
 }

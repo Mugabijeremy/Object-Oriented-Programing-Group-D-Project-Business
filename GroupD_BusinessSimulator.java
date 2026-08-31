@@ -31,23 +31,21 @@ public class GroupD_BusinessSimulator {
             grandTotal += itemSubtotal;
 
             // Output receipt line item
-            System.out.printf("%-20s x%d = UGX %.2f %s%n", 
+            System.out.printf("%-20s x%d = UGX %.2f %s%n", // the "%-20s" formats the item name to be left-aligned in a field of 20 characters
                 items[i], quantities[i], itemSubtotal, discountNote);
         }
 
         System.out.println("--------------------------------------------------");
         System.out.printf("TOTAL               = UGX %.2f%n", grandTotal);
     }
-
     // Custom Method 1: Iterates through arrays using a loop to display the price list
     public static void displayPriceList(String[] names, double[] prices) {
         System.out.println("==== CITYCARE PHARMACY ====");
-        for (int i = 0; i < names.length; i++) {
+        for (int i = 0; i < names.length; i++) {   // names.length is used to determine the no. of items in the array and enables flexibility in case of future changes.
             System.out.printf("%d. %-20s UGX %.2f%n", (i + 1), names[i], prices[i]);
         }
         System.out.println();
     }
-
     // Custom Method 2: Computes item subtotal based on specific group rules
     public static double calculateSubtotal(int itemIndex, double price, int quantity) {
         double totalBeforeDiscount = price * quantity;
@@ -74,20 +72,23 @@ public class GroupD_BusinessSimulator {
                 return totalBeforeDiscount * 0.90;
             }
         }
-
         return totalBeforeDiscount;
     }
-
-    // Custom Method 3: Generates explicit discount descriptions for receipt lines
-    public static String getDiscountNote(int itemIndex, int quantity) {
-        if (itemIndex == 0) {
-            return (quantity >= 6) ? "(5% discount applied)" : "(no discount - fewer than 6)";
-        } else if (itemIndex == 1) {
+      // Custom Method 3:
+    // Returns a message describing whether a discount was applied.
+    public static String getDiscountNote(int itemIndex,int quantity) {
+        // Implemented the use of ternary operators to reduce lines of code and improve readability
+        if(itemIndex == 0){
+            return(quantity>=6) ? "(5% discount presnt)" : "(no discount - fewer than 6)";
+        }
+        else if(itemIndex == 1){
             return "(no discount)";
-        } else if (itemIndex == 2) {
-            return (quantity >= 4) ? "(UGX 1,000 discount applied)" : "(no discount - fewer than 4)";
-        } else if (itemIndex == 3) {
-            return (quantity >= 2) ? "(10% discount applied)" : "(no discount - fewer than 2)";
+        }
+        else if(itemIndex == 2){
+            return(quantity>=4)? "(UCX 1000 discount applied)":"(no discount-fewer than 4)";
+        }
+        else if(itemIndex == 3){
+            return(quantity>=2)? "(10% discount applied)":"(no discount-fewer than 2)";
         }
         return "";
     }

@@ -1,5 +1,23 @@
-
+/**
+ * GroupD_BusinessSimulator
+ *
+ * A simple procedural billing simulator for "CityCare Pharmacy".
+ * It stores item names, unit prices, and purchased quantities in
+ * parallel arrays, then prints a price list and an itemized receipt
+ * that applies a different discount rule per item.
+ *
+ * Usage: run main() directly — quantities are hard-coded for testing
+ * rather than read from user input.
+ */
 public class GroupD_BusinessSimulator {
+
+    /**
+     * Program entry point. Builds the item/price/quantity data,
+     * prints the pharmacy price list, then generates and prints
+     * an itemized receipt with per-item discounts and a grand total.
+     *
+     * @param args command-line arguments (unused)
+     */
     public static void main(String[] args) {
         // Parallel arrays for item names and prices
         String[] items = {
@@ -39,7 +57,14 @@ public class GroupD_BusinessSimulator {
         System.out.printf("TOTAL               = UGX %.2f%n", grandTotal);
     }
 
-    // Custom Method 1: Iterates through arrays using a loop to display the price list
+    /**
+     * Custom Method 1: Displays the pharmacy's numbered price list.
+     * Iterates through the parallel name/price arrays using an index
+     * so each item can be printed with a matching line number.
+     *
+     * @param names  array of item names, in display order
+     * @param prices array of unit prices, aligned by index to {@code names}
+     */
     public static void displayPriceList(String[] names, double[] prices) {
         System.out.println("==== CITYCARE PHARMACY ====");
         for (int i = 0; i < names.length; i++) {
@@ -48,7 +73,24 @@ public class GroupD_BusinessSimulator {
         System.out.println();
     }
 
-    // Custom Method 2: Computes item subtotal based on specific group rules
+    /**
+     * Custom Method 2: Computes the subtotal for one line item after
+     * applying that item's specific discount rule.
+     *
+     * Discount rules (by item index):
+     * <ul>
+     *   <li>0 — Paracetamol: 5% off when quantity is 6 or more</li>
+     *   <li>1 — Cough Syrup: never discounted</li>
+     *   <li>2 — Bandages: flat UGX 1,000 off when quantity is 4 or more</li>
+     *   <li>3 — Vitamins: 10% off when quantity is 2 or more</li>
+     * </ul>
+     *
+     * @param itemIndex index of the item in the items/prices arrays,
+     *                  used to select which discount rule applies
+     * @param price     unit price of the item
+     * @param quantity  number of units purchased
+     * @return the subtotal (price * quantity) after any applicable discount
+     */
     public static double calculateSubtotal(int itemIndex, double price, int quantity) {
         double totalBeforeDiscount = price * quantity;
 
@@ -78,8 +120,16 @@ public class GroupD_BusinessSimulator {
         return totalBeforeDiscount;
     }
 
-      // Custom Method 3:
-    // Returns a message describing whether a discount was applied.
+    /**
+     * Custom Method 3: Returns a human-readable note describing whether
+     * a discount was applied for the given item, mirroring the same
+     * rule thresholds used in {@link #calculateSubtotal(int, double, int)}.
+     *
+     * @param itemIndex index of the item, used to select the matching rule
+     * @param quantity  number of units purchased
+     * @return a short receipt annotation, e.g. "(5% discount applied)"
+     *         or "(no discount)"
+     */
     public static String getDiscountNote(
         int itemIndex,
         int quantity

@@ -49,7 +49,7 @@ public class GroupD_BusinessSimulator {
             grandTotal += itemSubtotal;
 
             // Output receipt line item
-            System.out.printf("%-20s x%d = UGX %.2f %s%n", 
+            System.out.printf("%-20s x%d = UGX %.2f %s%n",
                 items[i], quantities[i], itemSubtotal, discountNote);
         }
 
@@ -116,64 +116,27 @@ public class GroupD_BusinessSimulator {
                 return totalBeforeDiscount * 0.90;
             }
         }
-
         return totalBeforeDiscount;
     }
 
     /**
      * Custom Method 3: Returns a human-readable note describing whether
-     * a discount was applied for the given item, mirroring the same
-     * rule thresholds used in {@link #calculateSubtotal(int, double, int)}.
+     * a discount was applied for the given item.
      *
      * @param itemIndex index of the item, used to select the matching rule
      * @param quantity  number of units purchased
-     * @return a short receipt annotation, e.g. "(5% discount applied)"
-     *         or "(no discount)"
+     * @return a short receipt annotation
      */
-    public static String getDiscountNote(
-        int itemIndex,
-        int quantity
-    ) {
-
+    public static String getDiscountNote(int itemIndex, int quantity) {
         if (itemIndex == 0) {
-
-            if (quantity >= 6) {
-                return "(5% discount applied)";
-            } else {
-                return "(no discount - fewer than 6)";
-            }
-
-        }
-
-        else if (itemIndex == 1) {
-
+            return (quantity >= 6) ? "(5% discount applied)" : "(no discount - fewer than 6)";
+        } else if (itemIndex == 1) {
             return "(no discount)";
-
+        } else if (itemIndex == 2) {
+            return (quantity >= 4) ? "(UGX 1,000 discount applied)" : "(no discount - fewer than 4)";
+        } else if (itemIndex == 3) {
+            return (quantity >= 2) ? "(10% discount applied)" : "(no discount - fewer than 2)";
         }
-
-        else if (itemIndex == 2) {
-
-            if (quantity >= 4) {
-                return "(UGX 1,000 discount applied)";
-            } else {
-                return "(no discount - fewer than 4)";
-            }
-
-        }
-
-        else if (itemIndex == 3) {
-
-            if (quantity >= 2) {
-                return "(10% discount applied)";
-            } else {
-                return "(no discount - fewer than 2)";
-            }
-
-        }
-
-        else {
-
-            return "";
-        }
+        return "";
     }
 }
